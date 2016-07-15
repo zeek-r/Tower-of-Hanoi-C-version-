@@ -25,7 +25,7 @@ int main(void)
 	{
 		printf("Please enter the length of the tower(0-10): ");
 		scanf("%d", &size);
-	}while(size > 10 || size < 0)
+	}while(size > 10 || size < 0);
 	clear();
 	greet();
 	init();
