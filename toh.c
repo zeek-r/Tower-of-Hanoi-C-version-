@@ -110,13 +110,13 @@ void greet(void)
 {
 	char c[30];
 	strcpy(c, "TOWER OF HANOI");
-	printf("\t\t\t\tTOWER OF HANOI\n\t\t\t\t");
-	printf("\t\t\t\t**BY ROSHAN BISTA**\t\t\t\t");
+	printf("\t\t\t\t  TOWER OF HANOI\n\t\t\t\t  ");
 	for(int i = 0; i < strlen(c); i++)
 	{
 		printf("_");
 		
 	}
+	printf("\n\t\t\t\t**BY ROSHAN BISTA**\t\t\t\t  ");
 	printf("\n\n");
 	usleep(500000);
 }
@@ -229,4 +229,3 @@ bool won(void)
 	}
 return true;
 }
-
