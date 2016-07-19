@@ -1,3 +1,13 @@
+/**
+ * 
+ * C Version
+ * Tower of Hanoi
+ * Game made just for fun
+ * Roshan Bista
+ * 
+ **/
+
+#define _XOPEN_SOURCE 500
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -41,7 +51,7 @@ int main(void)
 		printf("\nChoice: ");
 		
 		if(counter == 0)
-		printf("**Please select the block number and shaft(for  block 1 to shaft 2 enter: 1, 2): ");
+		printf("**Please select the block number and tower(for  block 1 to tower 2 enter: 1, 2): ");
 		scanf("%d %d", &ch[0], &ch[1]);
 		move();
 		if(won())
@@ -101,6 +111,7 @@ void greet(void)
 	char c[30];
 	strcpy(c, "TOWER OF HANOI");
 	printf("\t\t\t\tTOWER OF HANOI\n\t\t\t\t");
+	printf("\t\t\t\t**BY ROSHAN BISTA**\t\t\t\t");
 	for(int i = 0; i < strlen(c); i++)
 	{
 		printf("_");
@@ -117,7 +128,7 @@ void clear(void)
 
 void draw(void)
 {
-	printf("\t\tShaft %d\t\t\tShaft %d\t\t\tShaft %d\n\n", 1, 2, 3);
+	printf("\t\tTower %d\t\t\tTower %d\t\t\tTower %d\n\n", 1, 2, 3);
 	for(int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < 3; j++)
