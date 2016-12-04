@@ -15,10 +15,14 @@
 #include <stdbool.h>
 #include <math.h>
 
-
+//Maximum size allowed for the length of the tower
 #define MAX 10
 
+//Some global variables
 int array[MAX][MAX], size, ch[2], counter = 0;
+
+//File for logging data
+FILE *fp;
 
 void clear(void);
 void init(void);
@@ -27,18 +31,22 @@ bool won(void);
 void draw(void);
 void move(void);
 
-
-
 int main(void)
-{	
+{
+	//ASK user for the length of the tower, allowed 0-10
 	do
 	{
 		printf("Please enter the length of the tower(0-10): ");
 		scanf("%d", &size);
 	}while(size > 10 || size < 0);
+	
+	//clears the screen
 	clear();
+	//greets user
 	greet();
+	//initializes the board
 	init();
+	//infinite loop to print the board until game is won
 	while(true)
 	{
 		if(counter > 0)
@@ -46,14 +54,19 @@ int main(void)
 			clear();
 			greet();
 		}
-			
+		
+		//Draw the game board
 		draw();
 		printf("\nChoice: ");
 		
 		if(counter == 0)
-		printf("**Please select the block number and tower(for  block 1 to tower 2 enter: 1, 2): ");
+		printf("**Please select the block number and tower( e.g. for  block 1 to tower 2 enter: 1, 2): ");
 		scanf("%d %d", &ch[0], &ch[1]);
+		
+		//Call function for moving the block
 		move();
+		
+		//Check if the winning configuration matches
 		if(won())
 		{
 			clear();
@@ -65,10 +78,10 @@ int main(void)
 	return 0;
 }
 
+//Function for initializing the board and gamelog
 void init(void)
 {
-	FILE *fp;
-	fp = fopen("game_log.txt", "a");
+	fp = fopen("game_log.txt", "w");
 	if(counter == 0)
 	{
 		for(int i = 0; i < size; i++)
@@ -103,32 +116,36 @@ void init(void)
 		}
 	fprintf(fp, "\n");
 	}
+	fprintf(fp, "\n");
 	fclose(fp);
 }
 
+//Function for greeting the User and also the header of the game
 void greet(void)
 {
 	char c[30];
 	strcpy(c, "TOWER OF HANOI");
-	printf("\t\t\t\t  TOWER OF HANOI\n\t\t\t\t  ");
+	printf("\t\t\t\tTOWER OF HANOI\n\t\t\t\t");
 	for(int i = 0; i < strlen(c); i++)
 	{
 		printf("_");
 		
 	}
-	printf("\n\t\t\t\t**BY ROSHAN BISTA**\t\t\t\t  ");
 	printf("\n\n");
 	usleep(500000);
 }
 
+//Function for clearing the screen
 void clear(void)
 {
 	printf("\e[1;1H\e[2J");
 }
 
+//Function for drawing board
 void draw(void)
 {
-	printf("\t\tTower %d\t\t\tTower %d\t\t\tTower %d\n\n", 1, 2, 3);
+	fp = fopen("game_log.txt", "a");
+	printf("\t\ttower %d\t\t\ttower %d\t\t\ttower %d\n\n", 1, 2, 3);
 	for(int i = 0; i < size; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -136,18 +153,26 @@ void draw(void)
 			if(array[i][j] == 0)
 			{
 				printf("\t\t-\t");
+				fprintf(fp, "0 |");
 			}
 			else
-			printf("\t\t%d\t", array[i][j]);
+			{
+				printf("\t\t%d\t", array[i][j]);
+				fprintf(fp, "%d |", array[i][j]);
+			}
 		}
 		printf("\n");
+		fprintf(fp, "\n");
 	}
+	fprintf(fp, "\n");
+	fclose(fp);
 	if(counter > 0)
 	{
 		printf("Steps used:%d\t\t\n", counter);
 	}
 }
 
+//Function for moving blocks
 void move(void)
 {
 	int illegal = 0;
@@ -215,6 +240,7 @@ void move(void)
 	
 }
 
+//Function for checking the winning configuration
 bool won(void)
 {
 	for(int i = 0; i < size; i++)
