@@ -2,7 +2,7 @@
 Console version of Tower of Hanoi Game
 
 Compile file
->> cc toc.c -lm -o toc
+>> cc toh.c -lm -o toc
 
 Run it
 >> ./toc
