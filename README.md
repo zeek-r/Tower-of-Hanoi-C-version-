@@ -2,9 +2,9 @@
 Console version of Tower of Hanoi Game
 
 Compile file
->> cc toh.c -lm -o toc
+>> cc toh.c -lm -o toh
 
 Run it
->> ./toc
+>> ./toh
 
 Enjoy Game !
